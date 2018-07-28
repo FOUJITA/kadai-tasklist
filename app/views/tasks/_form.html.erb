@@ -1,29 +1,38 @@
-<div class="row">
-  <div class="col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
-  <%#フォーム開始%>
-    <%= form_for(task) do |f| %>
-      <% if task.errors.any? %>
-        <div class="alert alert-warning">
-          <ul>
-            <% task.errors.full_messages.each do |task| %>
-            <li><%= task %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+<%if logged_in? %>
+  <div class="row">
+    <div class="col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
+    <%#フォーム開始%>
+      <%= form_for(@task) do |f| %>
+        <% if task.errors.any? %>
+          <div class="alert alert-warning">
+            <ul>
+              <% task.errors.full_messages.each do |task| %>
+              <li><%= task %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-  <div class="form-group">
-    <%= f.label :status, '進捗' %>
+    <div class="form-group">
+      <%= f.label :status, '進捗' %>
       <%= f.text_field :status, class: 'form-control' %>
-  </div>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :content, 'タスク' %>
-    <%= f.text_field :content, class: 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.label :content, 'タスク' %>
+      <%= f.text_field :content, class: 'form-control' %>
+    </div>
 
-  <%= f.submit '投稿', class: 'btn btn-primary' %>
+    <%= f.submit '投稿', class: 'btn btn-primary' %>
     <% end %>
-  <%#フォーム終了%>
- </div>
-</div>
+    <%#フォーム終了%>
+   </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the Microposts</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
